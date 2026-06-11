@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Linki Health{% endblock %}
+
+{% block content %}
+<section class="dashboard-shell">
+    <div class="wizard-header">
+        <p class="eyebrow">Panel interno</p>
+        <h1>Dashboard de citas</h1>
+    </div>
+
+    <div class="metric-grid">
+        <article class="metric-card">
+            <span>Total citas</span>
+            <strong>{{ total_citas }}</strong>
+        </article>
+        <article class="metric-card">
+            <span>Confirmadas</span>
+            <strong>{{ confirmadas }}</strong>
+        </article>
+    </div>
+
+    <div class="table-card">
+        <div class="table-header">
+            <h2>Citas registradas</h2>
+            <p>Vista simple para demostrar la reserva y persistencia en MySQL.</p>
+        </div>
+        <div class="responsive-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Paciente</th>
+                        <th>Especialidad</th>
+                        <th>Profesional</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cita in citas %}
+                    <tr>
+                        <td>{{ cita.paciente }}</td>
+                        <td>{{ cita.especialidad }}</td>
+                        <td>{{ cita.profesional }}</td>
+                        <td>{{ cita.fecha.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ cita.hora_inicio|string|truncate(5, True, '') }}</td>
+                        <td><span class="status-pill">{{ cita.estado }}</span></td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="6">Todavía no existen citas registradas.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
