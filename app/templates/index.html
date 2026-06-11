@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Inicio | Linki Health{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <p class="eyebrow">Proceso de admisión Tech F2 - 2026</p>
+        <h1>Agenda citas médicas en pocos pasos</h1>
+        <p>Un módulo web minimalista para seleccionar especialidad, profesional, fecha disponible, datos del paciente y confirmación de reserva.</p>
+        <div class="hero-actions">
+            <a class="btn primary" href="{{ url_for('public.reservar') }}">Reservar una cita</a>
+            <a class="btn secondary" href="{{ url_for('admin.dashboard') }}">Ver dashboard</a>
+        </div>
+    </div>
+    <div class="hero-card" aria-label="Resumen de flujo">
+        <span>1/5</span>
+        <h2>Flujo guiado</h2>
+        <p>Solo se muestra un paso a la vez para reducir fricción y mejorar la experiencia móvil.</p>
+    </div>
+</section>
+
+<section class="features">
+    <article>
+        <h3>Calendario real</h3>
+        <p>Vista mensual con días disponibles, selección clara y horarios por profesional.</p>
+    </article>
+    <article>
+        <h3>Base de datos</h3>
+        <p>Registro en MySQL con especialidades, profesionales, horarios, pacientes y citas.</p>
+    </article>
+    <article>
+        <h3>Responsive</h3>
+        <p>Interfaz optimizada para celular y escritorio con diseño limpio y accesible.</p>
+    </article>
+</section>
+{% endblock %}
