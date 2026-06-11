@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}Reservar cita | Linki Health{% endblock %}
+
+{% block content %}
+<section class="wizard-shell">
+    <div class="wizard-header">
+        <p class="eyebrow">Reserva guiada</p>
+        <h1>Programa tu cita médica</h1>
+        <div class="progress-wrap" aria-label="Progreso de reserva">
+            <div class="progress-label"><span id="stepText">Paso 1/5</span><span id="stepName">Especialidad</span></div>
+            <div class="progress-bar"><span id="progressBar"></span></div>
+        </div>
+    </div>
+
+    <form class="wizard-card" id="appointmentForm" action="{{ url_for('public.confirmar_cita') }}" method="post" novalidate>
+        <input type="hidden" name="especialidad_id" id="especialidadId">
+        <input type="hidden" name="profesional_id" id="profesionalId">
+        <input type="hidden" name="horario_id" id="horarioId">
+
+        <section class="step is-active" data-step="1">
+            <h2>Elige una especialidad</h2>
+            <p class="muted">Selecciona el área médica que necesitas.</p>
+            <div class="option-grid">
+                {% for especialidad in especialidades %}
+                <button class="option-card" type="button" data-specialty-id="{{ especialidad.id }}" data-specialty-name="{{ especialidad.nombre }}">
+                    <strong>{{ especialidad.nombre }}</strong>
+                    <span>{{ especialidad.descripcion }}</span>
+                </button>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="step" data-step="2">
+            <h2>Elige un profesional</h2>
+            <p class="muted">Mostraremos profesionales según la especialidad seleccionada.</p>
+            <div class="option-grid" id="professionalsList"></div>
+        </section>
+
+        <section class="step" data-step="3">
+            <h2>Elige fecha y horario</h2>
+            <p class="muted">Los días marcados tienen horarios registrados para el profesional.</p>
+            <div class="calendar-card">
+                <div class="calendar-toolbar">
+                    <button type="button" class="icon-btn" id="prevMonth" aria-label="Mes anterior">‹</button>
+                    <strong id="calendarTitle"></strong>
+                    <button type="button" class="icon-btn" id="nextMonth" aria-label="Mes siguiente">›</button>
+                </div>
+                <div class="weekdays" aria-hidden="true">
+                    <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+            <div class="time-panel">
+                <h3>Horarios disponibles</h3>
+                <div class="time-list" id="timeList"><p class="muted">Selecciona un día disponible.</p></div>
+            </div>
+        </section>
+
+        <section class="step" data-step="4">
+            <h2>Datos del paciente</h2>
+            <p class="muted">Completa los datos necesarios para confirmar la cita.</p>
+            <div class="form-grid">
+                <label>Nombre completo
+                    <input type="text" name="nombre_completo" id="nombreCompleto" autocomplete="name" required>
+                </label>
+                <label>Documento
+                    <input type="text" name="documento" autocomplete="off">
+                </label>
+                <label>Teléfono
+                    <input type="tel" name="telefono" id="telefono" autocomplete="tel" required>
+                </label>
+                <label>Correo electrónico
+                    <input type="email" name="email" id="email" autocomplete="email" required>
+                </label>
+                <label>Fecha de nacimiento
+                    <input type="date" name="fecha_nacimiento">
+                </label>
+                <label class="full">Motivo de consulta
+                    <textarea name="motivo" rows="3" placeholder="Ejemplo: control general, dolor, seguimiento médico..."></textarea>
+                </label>
+            </div>
+        </section>
+
+        <section class="step" data-step="5">
+            <h2>Confirma tu cita</h2>
+            <p class="muted">Revisa los datos antes de guardar la reserva.</p>
+            <div class="summary-card" id="summaryCard"></div>
+        </section>
+
+        <div class="wizard-actions">
+            <button class="btn secondary" type="button" id="prevStep">Anterior</button>
+            <button class="btn primary" type="button" id="nextStep">Siguiente</button>
+            <button class="btn primary is-hidden" type="submit" id="submitBtn">Confirmar cita</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
