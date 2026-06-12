@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, time, timedelta
 import unicodedata
 
 from app.database import db_cursor
@@ -35,7 +35,9 @@ def _dias_a_indices(dias_atencion):
 
 
 def _a_datetime(fecha, hora):
-    return datetime.combine(fecha, datetime.min.time()) + hora
+    if isinstance(hora, timedelta):
+        return datetime.combine(fecha, time.min) + hora
+    return datetime.combine(fecha, hora)
 
 
 def asegurar_horarios_desde_disponibilidad(profesional_id, dias=60):
