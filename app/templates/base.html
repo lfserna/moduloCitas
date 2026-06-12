@@ -15,10 +15,6 @@
                 <small>Programación de citas</small>
             </span>
         </a>
-        <nav class="nav-actions" aria-label="Menú principal">
-            <a href="{{ url_for('public.reservar') }}"><span class="nav-icon">＋</span><span>Reservar</span></a>
-            <a href="{{ url_for('admin.dashboard') }}"><span class="nav-icon">▦</span><span>Dashboard</span></a>
-        </nav>
     </header>
 
     <main>
@@ -26,6 +22,10 @@
     </main>
 
     <footer class="site-footer">
+        <nav class="nav-actions footer-menu" aria-label="Menú principal">
+            <a href="{{ url_for('public.reservar') }}"><span class="nav-icon">＋</span><span>Reservar</span></a>
+            <a href="{{ url_for('admin.dashboard') }}"><span class="nav-icon">▦</span><span>Dashboard</span></a>
+        </nav>
         <span>Demo técnica para módulo de programación de citas médicas.</span>
         <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar modo claro u oscuro">
             <span class="theme-icon sun">☀</span>
