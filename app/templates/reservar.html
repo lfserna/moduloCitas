@@ -6,9 +6,16 @@
     <div class="wizard-header">
         <p class="eyebrow">Reserva guiada</p>
         <h1>Programa tu cita médica</h1>
-        <div class="progress-wrap" aria-label="Progreso de reserva">
-            <div class="progress-label"><span id="stepText">Paso 1/5</span><span id="stepName">Especialidad</span></div>
-            <div class="progress-bar"><span id="progressBar"></span></div>
+        <div class="stepper" aria-label="Progreso de reserva">
+            <div class="stepper-item is-active" data-step-dot="1"><span>1</span><small>Especialidad</small></div>
+            <div class="stepper-line"></div>
+            <div class="stepper-item" data-step-dot="2"><span>2</span><small>Profesional</small></div>
+            <div class="stepper-line"></div>
+            <div class="stepper-item" data-step-dot="3"><span>3</span><small>Fecha</small></div>
+            <div class="stepper-line"></div>
+            <div class="stepper-item" data-step-dot="4"><span>4</span><small>Datos</small></div>
+            <div class="stepper-line"></div>
+            <div class="stepper-item" data-step-dot="5"><span>5</span><small>Confirmar</small></div>
         </div>
     </div>
 
@@ -16,10 +23,11 @@
         <input type="hidden" name="especialidad_id" id="especialidadId">
         <input type="hidden" name="profesional_id" id="profesionalId">
         <input type="hidden" name="horario_id" id="horarioId">
+        <input type="hidden" name="fecha_nacimiento" id="fechaNacimiento">
 
         <section class="step is-active" data-step="1">
             <h2>Elige una especialidad</h2>
-            <p class="muted">Selecciona el área médica que necesitas.</p>
+            <p class="muted">Selecciona el área médica que necesitas. Al elegir una opción, avanzarás automáticamente.</p>
             <div class="option-grid">
                 {% for especialidad in especialidades %}
                 <button class="option-card" type="button" data-specialty-id="{{ especialidad.id }}" data-specialty-name="{{ especialidad.nombre }}">
@@ -32,13 +40,13 @@
 
         <section class="step" data-step="2">
             <h2>Elige un profesional</h2>
-            <p class="muted">Mostraremos profesionales según la especialidad seleccionada.</p>
+            <p class="muted">Mostraremos profesionales según la especialidad seleccionada. Al elegir un profesional, pasarás al calendario.</p>
             <div class="option-grid" id="professionalsList"></div>
         </section>
 
         <section class="step" data-step="3">
             <h2>Elige fecha y horario</h2>
-            <p class="muted">Los días marcados tienen horarios registrados para el profesional.</p>
+            <p class="muted">Para esta demo cada cita dura 30 minutos. La disponibilidad se muestra como turnos generados dentro de la jornada del profesional.</p>
             <div class="calendar-card">
                 <div class="calendar-toolbar">
                     <button type="button" class="icon-btn" id="prevMonth" aria-label="Mes anterior">‹</button>
@@ -64,17 +72,22 @@
                     <input type="text" name="nombre_completo" id="nombreCompleto" autocomplete="name" required>
                 </label>
                 <label>Documento
-                    <input type="text" name="documento" autocomplete="off">
+                    <input type="text" name="documento" id="documento" inputmode="numeric" pattern="[0-9]*" autocomplete="off">
                 </label>
                 <label>Teléfono
-                    <input type="tel" name="telefono" id="telefono" autocomplete="tel" required>
+                    <input type="tel" name="telefono" id="telefono" inputmode="numeric" pattern="[0-9]*" autocomplete="tel" required>
                 </label>
                 <label>Correo electrónico
                     <input type="email" name="email" id="email" autocomplete="email" required>
                 </label>
-                <label>Fecha de nacimiento
-                    <input type="date" name="fecha_nacimiento">
-                </label>
+                <fieldset class="birth-field">
+                    <legend>Fecha de nacimiento</legend>
+                    <div class="birth-grid">
+                        <select id="birthDay" aria-label="Día"></select>
+                        <select id="birthMonth" aria-label="Mes"></select>
+                        <select id="birthYear" aria-label="Año"></select>
+                    </div>
+                </fieldset>
                 <label class="full">Motivo de consulta
                     <textarea name="motivo" rows="3" placeholder="Ejemplo: control general, dolor, seguimiento médico..."></textarea>
                 </label>
