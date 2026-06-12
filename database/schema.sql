@@ -22,6 +22,18 @@ CREATE TABLE profesionales (
     CONSTRAINT fk_profesional_especialidad FOREIGN KEY (especialidad_id) REFERENCES especialidades(id)
 );
 
+CREATE TABLE disponibilidad_profesional (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    profesional_id INT NOT NULL,
+    tipo_jornada ENUM('medio_tiempo','tiempo_completo','personalizada') NOT NULL,
+    dias_atencion VARCHAR(80) NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    duracion_cita_minutos INT NOT NULL DEFAULT 30,
+    activo TINYINT(1) NOT NULL DEFAULT 1,
+    CONSTRAINT fk_disponibilidad_profesional FOREIGN KEY (profesional_id) REFERENCES profesionales(id)
+);
+
 CREATE TABLE horarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     profesional_id INT NOT NULL,
@@ -78,9 +90,20 @@ INSERT INTO profesionales (especialidad_id, nombre, matricula, descripcion, foto
 (5, 'Dra. Mariana Flores', 'GIN-5190', 'Controles ginecológicos y salud preventiva.', NULL),
 (6, 'Dr. Diego Arce', 'TRA-6222', 'Lesiones deportivas y dolor articular.', NULL);
 
+INSERT INTO disponibilidad_profesional (profesional_id, tipo_jornada, dias_atencion, hora_inicio, hora_fin, duracion_cita_minutos) VALUES
+(1, 'medio_tiempo', 'Lunes a viernes', '08:00:00', '12:00:00', 30),
+(2, 'tiempo_completo', 'Lunes a viernes', '08:00:00', '16:00:00', 30),
+(3, 'medio_tiempo', 'Lunes, miércoles y viernes', '08:00:00', '12:00:00', 30),
+(4, 'medio_tiempo', 'Martes y jueves', '09:00:00', '13:00:00', 30),
+(5, 'tiempo_completo', 'Lunes a viernes', '08:00:00', '16:00:00', 30),
+(6, 'medio_tiempo', 'Lunes, miércoles y viernes', '09:00:00', '13:00:00', 30),
+(7, 'medio_tiempo', 'Martes y jueves', '08:00:00', '12:00:00', 30),
+(8, 'tiempo_completo', 'Lunes a viernes', '08:00:00', '16:00:00', 30);
+
 INSERT INTO horarios (profesional_id, fecha, hora_inicio, hora_fin, disponible) VALUES
 (1, '2026-02-02', '08:00:00', '08:30:00', 1),
 (1, '2026-02-02', '08:30:00', '09:00:00', 0),
+(1, '2026-02-02', '09:00:00', '09:30:00', 1),
 (1, '2026-02-03', '09:00:00', '09:30:00', 1),
 (1, '2026-02-05', '10:00:00', '10:30:00', 1),
 (2, '2026-02-02', '11:00:00', '11:30:00', 1),
@@ -107,4 +130,4 @@ INSERT INTO pacientes (nombre_completo, documento, telefono, email, fecha_nacimi
 
 INSERT INTO citas (paciente_id, especialidad_id, profesional_id, horario_id, motivo, estado) VALUES
 (1, 1, 1, 2, 'Control general de ejemplo.', 'confirmada'),
-(2, 3, 5, 14, 'Consulta cardiológica de ejemplo.', 'confirmada');
+(2, 3, 5, 15, 'Consulta cardiológica de ejemplo.', 'confirmada');
