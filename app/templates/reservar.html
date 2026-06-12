@@ -7,14 +7,11 @@
         <p class="eyebrow">Reserva guiada</p>
         <h1>Programa tu cita médica</h1>
         <div class="stepper" aria-label="Progreso de reserva">
+            <div class="stepper-track"><span id="stepperFill"></span></div>
             <div class="stepper-item is-active" data-step-dot="1"><span>1</span><small>Especialidad</small></div>
-            <div class="stepper-line"></div>
             <div class="stepper-item" data-step-dot="2"><span>2</span><small>Profesional</small></div>
-            <div class="stepper-line"></div>
             <div class="stepper-item" data-step-dot="3"><span>3</span><small>Fecha</small></div>
-            <div class="stepper-line"></div>
             <div class="stepper-item" data-step-dot="4"><span>4</span><small>Datos</small></div>
-            <div class="stepper-line"></div>
             <div class="stepper-item" data-step-dot="5"><span>5</span><small>Confirmar</small></div>
         </div>
     </div>
@@ -46,7 +43,7 @@
 
         <section class="step" data-step="3">
             <h2>Elige fecha y horario</h2>
-            <p class="muted">Para esta demo cada cita dura 30 minutos. La disponibilidad se muestra como turnos generados dentro de la jornada del profesional.</p>
+            <p class="muted">El sistema genera los turnos de 30 minutos dentro de la jornada del profesional. Los horarios ocupados aparecen bloqueados.</p>
             <div class="calendar-card">
                 <div class="calendar-toolbar">
                     <button type="button" class="icon-btn" id="prevMonth" aria-label="Mes anterior">‹</button>
@@ -59,7 +56,7 @@
                 <div class="calendar-grid" id="calendarGrid"></div>
             </div>
             <div class="time-panel">
-                <h3>Horarios disponibles</h3>
+                <h3>Turnos de la jornada</h3>
                 <div class="time-list" id="timeList"><p class="muted">Selecciona un día disponible.</p></div>
             </div>
         </section>
@@ -83,9 +80,9 @@
                 <fieldset class="birth-field">
                     <legend>Fecha de nacimiento</legend>
                     <div class="birth-grid">
-                        <select id="birthDay" aria-label="Día"></select>
-                        <select id="birthMonth" aria-label="Mes"></select>
-                        <select id="birthYear" aria-label="Año"></select>
+                        <div class="birth-wheel" id="birthDayWheel" aria-label="Día" tabindex="0"></div>
+                        <div class="birth-wheel" id="birthMonthWheel" aria-label="Mes" tabindex="0"></div>
+                        <div class="birth-wheel" id="birthYearWheel" aria-label="Año" tabindex="0"></div>
                     </div>
                 </fieldset>
                 <label class="full">Motivo de consulta
