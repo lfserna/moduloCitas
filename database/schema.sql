@@ -101,33 +101,15 @@ INSERT INTO disponibilidad_profesional (profesional_id, tipo_jornada, dias_atenc
 (8, 'tiempo_completo', 'Lunes a viernes', '08:00:00', '16:00:00', 30);
 
 INSERT INTO horarios (profesional_id, fecha, hora_inicio, hora_fin, disponible) VALUES
-(1, '2026-02-02', '08:00:00', '08:30:00', 1),
-(1, '2026-02-02', '08:30:00', '09:00:00', 0),
-(1, '2026-02-02', '09:00:00', '09:30:00', 1),
-(1, '2026-02-03', '09:00:00', '09:30:00', 1),
-(1, '2026-02-05', '10:00:00', '10:30:00', 1),
-(2, '2026-02-02', '11:00:00', '11:30:00', 1),
-(2, '2026-02-04', '15:00:00', '15:30:00', 1),
-(2, '2026-02-06', '15:30:00', '16:00:00', 0),
-(3, '2026-02-03', '08:00:00', '08:30:00', 1),
-(3, '2026-02-03', '08:30:00', '09:00:00', 1),
-(3, '2026-02-07', '10:30:00', '11:00:00', 0),
-(4, '2026-02-04', '09:00:00', '09:30:00', 1),
-(4, '2026-02-05', '09:30:00', '10:00:00', 1),
-(5, '2026-02-06', '08:00:00', '08:30:00', 1),
-(5, '2026-02-06', '08:30:00', '09:00:00', 0),
-(5, '2026-02-09', '10:00:00', '10:30:00', 1),
-(6, '2026-02-10', '14:00:00', '14:30:00', 1),
-(6, '2026-02-11', '14:30:00', '15:00:00', 1),
-(7, '2026-02-12', '11:00:00', '11:30:00', 1),
-(7, '2026-02-13', '11:30:00', '12:00:00', 0),
-(8, '2026-02-14', '16:00:00', '16:30:00', 1),
-(8, '2026-02-16', '16:30:00', '17:00:00', 1);
+(1, DATE_ADD(CURDATE(), INTERVAL 1 DAY), '08:30:00', '09:00:00', 0),
+(2, DATE_ADD(CURDATE(), INTERVAL 2 DAY), '11:00:00', '11:30:00', 0),
+(5, DATE_ADD(CURDATE(), INTERVAL 3 DAY), '08:30:00', '09:00:00', 0),
+(8, DATE_ADD(CURDATE(), INTERVAL 4 DAY), '15:30:00', '16:00:00', 0);
 
 INSERT INTO pacientes (nombre_completo, documento, telefono, email, fecha_nacimiento) VALUES
 ('Paciente Demo Uno', '1234567', '70000001', 'paciente1@demo.com', '1998-04-12'),
 ('Paciente Demo Dos', '7654321', '70000002', 'paciente2@demo.com', '2001-09-21');
 
 INSERT INTO citas (paciente_id, especialidad_id, profesional_id, horario_id, motivo, estado) VALUES
-(1, 1, 1, 2, 'Control general de ejemplo.', 'confirmada'),
-(2, 3, 5, 15, 'Consulta cardiológica de ejemplo.', 'confirmada');
+(1, 1, 1, 1, 'Control general de ejemplo.', 'confirmada'),
+(2, 3, 5, 3, 'Consulta cardiológica de ejemplo.', 'confirmada');
